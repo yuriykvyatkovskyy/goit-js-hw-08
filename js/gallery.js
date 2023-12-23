@@ -86,3 +86,27 @@ const galleryItem = ({ preview, original, description }) => {
 const galleryMarkup = images.map(galleryItem).join('');
 
 gallery.innerHTML = galleryMarkup;
+
+gallery.addEventListener('click', event => {
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  const largeImage = event.target.dataset.source;
+  const img = document.createElement('img');
+  img.src = largeImage;
+  img.style.width = '1112px'; 
+  img.style.height = '640px'; 
+  img.addEventListener('load', () => {
+    const instance = basicLightbox.create(img.outerHTML);
+    instance.show();
+    
+     const escapeHandler = (event) => {
+      if (event.key === 'Escape') {
+        instance.close();
+        document.removeEventListener('keydown', escapeHandler);
+      }
+    };
+    document.addEventListener('keydown', escapeHandler);
+  });
+});
