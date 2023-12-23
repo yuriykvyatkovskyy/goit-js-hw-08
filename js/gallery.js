@@ -1,3 +1,5 @@
+'use strict';
+
 const images = [
   {
     preview:
@@ -63,3 +65,4 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
+ 
